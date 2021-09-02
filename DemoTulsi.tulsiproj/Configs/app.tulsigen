@@ -1,0 +1,66 @@
+{
+  "additionalFilePaths" : [
+    "ProjectManagement/BUILD",
+    "Lib/Logging/BUILD",
+    "Assets/BUILD",
+    "App/BUILD",
+    "config/BUILD"
+  ],
+  "buildTargets" : [
+    "//App:ios_app",
+    "//ProjectManagement:ProjectManagementTests"
+  ],
+  "optionSet" : {
+    "BazelBuildOptionsDebug" : {
+      "p" : "$(inherited)"
+    },
+    "BazelBuildOptionsRelease" : {
+      "p" : "$(inherited)"
+    },
+    "BazelBuildStartupOptionsDebug" : {
+      "p" : "$(inherited)"
+    },
+    "BazelBuildStartupOptionsRelease" : {
+      "p" : "$(inherited)"
+    },
+    "BuildActionPostActionScript" : {
+      "p" : "$(inherited)"
+    },
+    "BuildActionPreActionScript" : {
+      "p" : "$(inherited)"
+    },
+    "CommandlineArguments" : {
+      "p" : "$(inherited)"
+    },
+    "EnvironmentVariables" : {
+      "p" : "$(inherited)"
+    },
+    "LaunchActionPostActionScript" : {
+      "p" : "$(inherited)"
+    },
+    "LaunchActionPreActionScript" : {
+      "p" : "$(inherited)"
+    },
+    "ProjectGenerationBazelStartupOptions" : {
+      "p" : "$(inherited)"
+    },
+    "TestActionPostActionScript" : {
+      "p" : "$(inherited)"
+    },
+    "TestActionPreActionScript" : {
+      "p" : "$(inherited)"
+    }
+  },
+  "projectName" : "DemoTulsi",
+  "sourceFilters" : [
+    "App/...",
+    "App/Base.lproj",
+    "Assets",
+    "Lib/...",
+    "Lib/Logging",
+    "ProjectManagement/...",
+    "ProjectManagement/Sources",
+    "ProjectManagement/Tests",
+    "config"
+  ]
+}

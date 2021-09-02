@@ -1,0 +1,3 @@
+#!/bin/bash
+
+~/Applications/Tulsi.app/Contents/MacOS/Tulsi -- --bazel $(which bazel) --genconfig DemoTulsi.tulsiproj:$1

@@ -1,0 +1,16 @@
+{
+  "configDefaults" : {
+    "optionSet" : {
+
+    }
+  },
+  "packages" : [
+    "App",
+    "Assets",
+    "Lib/Logging",
+    "ProjectManagement",
+    "config"
+  ],
+  "projectName" : "DemoTulsi",
+  "workspaceRoot" : ".."
+}

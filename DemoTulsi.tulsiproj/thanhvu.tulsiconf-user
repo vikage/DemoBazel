@@ -1,0 +1,10 @@
+{
+  "optionSet" : {
+    "BazelPath" : {
+      "p" : "/Users/thanhvu/.bazel/bin/bazel"
+    },
+    "WorkspaceRootPath" : {
+      "p" : "/Users/thanhvu/Downloads/DemoBazelUnitTest"
+    }
+  }
+}
