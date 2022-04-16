@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rootVC = storyboard.instantiateInitialViewController()
         self.window?.rootViewController = rootVC
         self.window?.makeKeyAndVisible()
+
+        FirebaseApp.configure()
         return true
     }
 

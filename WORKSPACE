@@ -33,3 +33,9 @@ load(
 )
 
 apple_support_dependencies()
+
+http_archive(
+    name = "Firebase",
+    build_file = "@//Thirdparty/Firebase:BUILD",
+    url = "https://github.com/firebase/firebase-ios-sdk/releases/download/v8.15.0/Firebase.zip",
+)
