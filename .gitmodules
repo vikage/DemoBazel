@@ -1,0 +1,3 @@
+[submodule "Thirdparty/Alamofire/Sources"]
+	path = Thirdparty/Alamofire/Sources
+	url = https://github.com/Alamofire/Alamofire

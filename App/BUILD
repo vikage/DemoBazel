@@ -15,6 +15,7 @@ swift_library(
     deps = [
         "//Lib/Logging:TLLogging",
         "//ProjectManagement",
+        "//Thirdparty/Alamofire",
         "@Firebase//:FirebaseAnalytics",
         "@Firebase//:FirebaseCore",
         "@Firebase//:FirebaseCoreDiagnostics",
