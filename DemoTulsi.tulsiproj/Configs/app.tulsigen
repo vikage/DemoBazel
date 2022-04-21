@@ -18,7 +18,7 @@
     },
     "PostBuildPhaseRunScript": {
       "t" : {
-        "//App:ios_app" : "$SRCROOT/tools/upload-symbols -gsp $SRCROOT/Resources/GoogleService-Info.plist -p ios $SRCROOT/bazel-bin/App/ios_app.app.dSYM"
+        "//App:ios_app" : "$SRCROOT/tools/upload-symbols -gsp $SRCROOT/App/Resources/GoogleService-Info.plist -p ios $SRCROOT/bazel-bin/App/ios_app.app.dSYM"
       }
     },
     "BazelBuildOptionsDebug" : {

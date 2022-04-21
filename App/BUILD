@@ -9,6 +9,7 @@ swift_library(
     data = [
         "Base.lproj/LaunchScreen.storyboard",
         "Base.lproj/Main.storyboard",
+        "Resources/GoogleService-Info.plist",
         "//Assets",
     ],
     deps = [
