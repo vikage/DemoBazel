@@ -1,91 +1,173 @@
-load("@build_bazel_rules_apple//apple:apple.bzl", "apple_static_framework_import")
+load("@build_bazel_rules_apple//apple:apple.bzl", "apple_dynamic_xcframework_import")
 
-apple_static_framework_import(
+
+
+objc_library(
+    name = "Firebase",
+    enable_modules = True,
+    module_name = "Firebase",
+    deps = ["FirebaseAnalytics",
+    "FirebaseAnalyticsSwift",
+    "FirebaseCore",
+    "FirebaseCoreInternal",
+    "FirebaseCoreDiagnostics",
+    "FirebaseInstallations",
+    "GoogleAppMeasurement",
+    "GoogleAppMeasurementIdentitySupport",
+    "GoogleDataTransport",
+    "GoogleUtilities",
+    "nanopb",
+    "FBLPromises"
+    ],
+    visibility = ["//visibility:public"]
+)
+
+
+apple_dynamic_xcframework_import(
+    name = "FirebaseAnalyticsSwift",
+    xcframework_imports = glob(["FirebaseAnalytics/FirebaseAnalyticsSwift.xcframework/**"] ),
+    library_identifiers = {
+        "ios_device": "ios-arm64",
+        "ios_simulator": "ios-arm64_x86_64-simulator",
+    },
+    visibility = ["//visibility:public"],
+)
+
+apple_dynamic_xcframework_import(
     name = "FirebaseAnalytics",
-    framework_imports = select({
-        "@//config:is_arm": glob(["Firebase/FirebaseAnalytics/FirebaseAnalytics.xcframework/ios-arm64_armv7/FirebaseAnalytics.framework/**"]),
-        "@//conditions:default": glob(["Firebase/FirebaseAnalytics/FirebaseAnalytics.xcframework/ios-arm64_i386_x86_64-simulator/FirebaseAnalytics.framework/**"]),
-    }),
+    xcframework_imports = glob(["FirebaseAnalytics/FirebaseAnalytics.xcframework/**"] ),
+    library_identifiers = {
+        "ios_device": "ios-arm64_armv7",
+        "ios_simulator": "ios-arm64_i386_x86_64-simulator",
+    },
     visibility = ["//visibility:public"],
 )
 
-apple_static_framework_import(
+apple_dynamic_xcframework_import(
     name = "FirebaseCore",
-    framework_imports = select({
-        "@//config:is_arm": glob(["Firebase/FirebaseAnalytics/FirebaseCore.xcframework/ios-arm64_armv7/FirebaseCore.framework/**"]),
-        "@//conditions:default": glob(["Firebase/FirebaseAnalytics/FirebaseCore.xcframework/ios-arm64_i386_x86_64-simulator/FirebaseCore.framework/**"]),
-    }),
+    xcframework_imports = glob(["FirebaseAnalytics/FirebaseCore.xcframework/**"] ),
+    library_identifiers = {
+        "ios_device": "ios-arm64_armv7",
+        "ios_simulator": "ios-arm64_x86_64-simulator",
+    },
+    visibility = ["//visibility:public"],
+)
+apple_dynamic_xcframework_import(
+    name = "FirebaseCoreInternal",
+    xcframework_imports = glob(["FirebaseAnalytics/FirebaseCoreInternal.xcframework/**"] ),
+    library_identifiers = {
+        "ios_device": "ios-arm64",
+        "ios_simulator": "ios-arm64_x86_64-simulator",
+    },
     visibility = ["//visibility:public"],
 )
 
-apple_static_framework_import(
+
+
+
+
+apple_dynamic_xcframework_import(
     name = "FirebaseCoreDiagnostics",
-    framework_imports = select({
-        "@//config:is_arm": glob(["Firebase/FirebaseAnalytics/FirebaseCoreDiagnostics.xcframework/ios-arm64_armv7/FirebaseCoreDiagnostics.framework/**"]),
-        "@//conditions:default": glob(["Firebase/FirebaseAnalytics/FirebaseCoreDiagnostics.xcframework/ios-arm64_i386_x86_64-simulator/FirebaseCoreDiagnostics.framework/**"]),
-    }),
+    xcframework_imports = glob(["FirebaseAnalytics/FirebaseCoreDiagnostics.xcframework/**"] ),
+    library_identifiers = {
+        "ios_device": "ios-arm64_armv7",
+        "ios_simulator": "ios-arm64_x86_64-simulator",
+    },
     visibility = ["//visibility:public"],
 )
 
-apple_static_framework_import(
+
+
+apple_dynamic_xcframework_import(
     name = "FirebaseCrashlytics",
-    framework_imports = select({
-        "@//config:is_arm": glob(["Firebase/FirebaseCrashlytics/FirebaseCrashlytics.xcframework/ios-arm64_armv7/FirebaseCrashlytics.framework/**"]),
-        "@//conditions:default": glob(["Firebase/FirebaseCrashlytics/FirebaseCrashlytics.xcframework/ios-arm64_i386_x86_64-simulator/FirebaseCrashlytics.framework/**"]),
-    }),
+    xcframework_imports = glob(["FirebaseCrashlytics/FirebaseCrashlytics.xcframework/**"] ),
+    library_identifiers = {
+        "ios_device": "ios-arm64_armv7",
+        "ios_simulator": "ios-arm64_x86_64-simulator",
+    },
     visibility = ["//visibility:public"],
 )
 
-apple_static_framework_import(
+
+apple_dynamic_xcframework_import(
     name = "FirebaseInstallations",
-    framework_imports = select({
-        "@//config:is_arm": glob(["Firebase/FirebaseAnalytics/FirebaseInstallations.xcframework/ios-arm64_armv7/FirebaseInstallations.framework/**"]),
-        "@//conditions:default": glob(["Firebase/FirebaseAnalytics/FirebaseInstallations.xcframework/ios-arm64_i386_x86_64-simulator/FirebaseInstallations.framework/**"]),
-    }),
+    xcframework_imports = glob(["FirebaseAnalytics/FirebaseInstallations.xcframework/**"] ),
+    library_identifiers = {
+        "ios_device": "ios-arm64_armv7",
+        "ios_simulator": "ios-arm64_x86_64-simulator",
+    },
     visibility = ["//visibility:public"],
 )
 
-apple_static_framework_import(
+
+apple_dynamic_xcframework_import(
     name = "GoogleAppMeasurement",
-    framework_imports = select({
-        "@//config:is_arm": glob(["Firebase/FirebaseAnalytics/GoogleAppMeasurement.xcframework/ios-arm64_armv7/GoogleAppMeasurement.framework/**"]),
-        "@//conditions:default": glob(["Firebase/FirebaseAnalytics/GoogleAppMeasurement.xcframework/ios-arm64_i386_x86_64-simulator/GoogleAppMeasurement.framework/**"]),
-    }),
+    xcframework_imports = glob(["FirebaseAnalytics/GoogleAppMeasurement.xcframework/**"] ),
+    library_identifiers = {
+        "ios_device": "ios-arm64_armv7",
+        "ios_simulator": "ios-arm64_i386_x86_64-simulator",
+    },
     visibility = ["//visibility:public"],
 )
 
-apple_static_framework_import(
+
+apple_dynamic_xcframework_import(
+    name = "GoogleAppMeasurementIdentitySupport",
+    xcframework_imports = glob(["FirebaseAnalytics/GoogleAppMeasurementIdentitySupport.xcframework/**"] ),
+    library_identifiers = {
+        "ios_device": "ios-arm64_armv7",
+        "ios_simulator": "ios-arm64_i386_x86_64-simulator",
+    },
+    visibility = ["//visibility:public"],
+)
+
+
+
+
+apple_dynamic_xcframework_import(
     name = "GoogleDataTransport",
-    framework_imports = select({
-        "@//config:is_arm": glob(["Firebase/FirebaseAnalytics/GoogleDataTransport.xcframework/ios-arm64_armv7/GoogleDataTransport.framework/**"]),
-        "@//conditions:default": glob(["Firebase/FirebaseAnalytics/GoogleDataTransport.xcframework/ios-arm64_i386_x86_64-simulator/GoogleDataTransport.framework/**"]),
-    }),
+    xcframework_imports = glob(["FirebaseAnalytics/GoogleDataTransport.xcframework/**"] ),
+    library_identifiers = {
+        "ios_device": "ios-arm64_armv7",
+        "ios_simulator": "ios-arm64_x86_64-simulator",
+    },
     visibility = ["//visibility:public"],
 )
 
-apple_static_framework_import(
+
+apple_dynamic_xcframework_import(
     name = "GoogleUtilities",
-    framework_imports = select({
-        "@//config:is_arm": glob(["Firebase/FirebaseAnalytics/GoogleUtilities.xcframework/ios-arm64_armv7/GoogleUtilities.framework/**"]),
-        "@//conditions:default": glob(["Firebase/FirebaseAnalytics/GoogleUtilities.xcframework/ios-arm64_i386_x86_64-simulator/GoogleUtilities.framework/**"]),
-    }),
+    xcframework_imports = glob(["FirebaseAnalytics/GoogleUtilities.xcframework/**"] ),
+    library_identifiers = {
+        "ios_device": "ios-arm64_armv7",
+        "ios_simulator": "ios-arm64_x86_64-simulator",
+    },
     visibility = ["//visibility:public"],
 )
 
-apple_static_framework_import(
+
+
+apple_dynamic_xcframework_import(
     name = "nanopb",
-    framework_imports = select({
-        "@//config:is_arm": glob(["Firebase/FirebaseAnalytics/nanopb.xcframework/ios-arm64_armv7/nanopb.framework/**"]),
-        "@//conditions:default": glob(["Firebase/FirebaseAnalytics/nanopb.xcframework/ios-arm64_i386_x86_64-simulator/nanopb.framework/**"]),
-    }),
+    xcframework_imports = glob(["FirebaseAnalytics/nanopb.xcframework/**"] ),
+    library_identifiers = {
+        "ios_device": "ios-arm64_armv7",
+        "ios_simulator": "ios-arm64_x86_64-simulator",
+    },
     visibility = ["//visibility:public"],
 )
 
-apple_static_framework_import(
-    name = "PromisesObjC",
-    framework_imports = select({
-        "@//config:is_arm": glob(["Firebase/FirebaseAnalytics/PromisesObjC.xcframework/ios-arm64_armv7/PromisesObjC.framework/**"]),
-        "@//conditions:default": glob(["Firebase/FirebaseAnalytics/PromisesObjC.xcframework/ios-arm64_i386_x86_64-simulator/PromisesObjC.framework/**"]),
-    }),
+
+
+
+apple_dynamic_xcframework_import(
+    name = "FBLPromises",
+    xcframework_imports = glob(["FirebaseAnalytics/FBLPromises.xcframework/**"] ),
+    library_identifiers = {
+        "ios_device": "ios-arm64_armv7",
+        "ios_simulator": "ios-arm64_x86_64-simulator",
+    },
     visibility = ["//visibility:public"],
 )
+
+

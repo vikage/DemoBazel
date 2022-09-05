@@ -15,16 +15,7 @@ swift_library(
     deps = [
         "//Lib/Logging:TLLogging",
         "//ProjectManagement",
-        "@Firebase//:FirebaseAnalytics",
-        "@Firebase//:FirebaseCore",
-        "@Firebase//:FirebaseCoreDiagnostics",
-        "@Firebase//:FirebaseCrashlytics",
-        "@Firebase//:FirebaseInstallations",
-        "@Firebase//:GoogleAppMeasurement",
-        "@Firebase//:GoogleDataTransport",
-        "@Firebase//:GoogleUtilities",
-        "@Firebase//:PromisesObjC",
-        "@Firebase//:nanopb",
+        "//Thirdparty/Firebase:Firebase",
     ],
 )
 

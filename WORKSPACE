@@ -2,8 +2,8 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "build_bazel_rules_apple",
-    sha256 = "4161b2283f80f33b93579627c3bd846169b2d58848b0ffb29b5d4db35263156a",
-    url = "https://github.com/bazelbuild/rules_apple/releases/download/0.34.0/rules_apple.0.34.0.tar.gz",
+    sha256 = "a19cf84dd060eda50be9ba5b0eca88377e0306ffbc1cc059df6a6947e48ac61a",
+    url = "https://github.com/bazelbuild/rules_apple/releases/download/1.1.1/rules_apple.1.1.1.tar.gz",
 )
 
 load(
@@ -34,8 +34,3 @@ load(
 
 apple_support_dependencies()
 
-http_archive(
-    name = "Firebase",
-    build_file = "@//Thirdparty/Firebase:BUILD",
-    url = "https://github.com/firebase/firebase-ios-sdk/releases/download/v8.15.0/Firebase.zip",
-)
