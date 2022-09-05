@@ -11,16 +11,7 @@
     "//ProjectManagement:ProjectManagementTests"
   ],
   "optionSet" : {
-    "PreBuildPhaseRunScript": {
-      "t": {
-        "//App:ios_app": "if which swiftlint >/dev/null; then \n  swiftlint \nelse \n  echo 'warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint' \n  exit 1\nfi"
-      }
-    },
-    "PostBuildPhaseRunScript": {
-      "t" : {
-        "//App:ios_app" : "$SRCROOT/tools/upload-symbols -gsp $SRCROOT/App/Resources/GoogleService-Info.plist -p ios $SRCROOT/bazel-bin/App/ios_app.app.dSYM"
-      }
-    },
+
     "BazelBuildOptionsDebug" : {
       "p" : "$(inherited)"
     },
