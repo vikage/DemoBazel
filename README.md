@@ -11,3 +11,6 @@ Store your plist here
 Update bundle id / signing
 
 Run `xcodegen app` to generate Xcode project
+
+
+bazel build @Firebase//:Firebase
