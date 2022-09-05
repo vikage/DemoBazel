@@ -1,0 +1,356 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name GoTrue
+import Combine
+import ComposableKeychain
+import Foundation
+import Get
+import KeychainAccess
+import Swift
+import URLQueryEncoderKit
+import _Concurrency
+public enum AuthChangeEvent : Swift.String {
+  case passwordRecovery
+  case signedIn
+  case signedOut
+  case tokenRefreshed
+  case userUpdated
+  case userDeleted
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+extension GoTrue.SessionOrUser {
+  public var user: GoTrue.User? {
+    get
+  }
+  public var session: GoTrue.Session? {
+    get
+  }
+}
+public struct UserCredentials : Swift.Codable, Swift.Equatable {
+  public var email: Swift.String?
+  public var password: Swift.String?
+  public var phone: Swift.String?
+  public var refreshToken: Swift.String?
+  public init(email: Swift.String? = nil, password: Swift.String? = nil, phone: Swift.String? = nil, refreshToken: Swift.String? = nil)
+  public static func == (a: GoTrue.UserCredentials, b: GoTrue.UserCredentials) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct SignUpRequest : Swift.Codable, Swift.Equatable {
+  public var email: Swift.String?
+  public var password: Swift.String?
+  public var phone: Swift.String?
+  public var data: [Swift.String : GoTrue.AnyJSON]?
+  public var gotrueMetaSecurity: GoTrue.GoTrueMetaSecurity?
+  public init(email: Swift.String? = nil, password: Swift.String? = nil, phone: Swift.String? = nil, data: [Swift.String : GoTrue.AnyJSON]? = nil, gotrueMetaSecurity: GoTrue.GoTrueMetaSecurity? = nil)
+  public static func == (a: GoTrue.SignUpRequest, b: GoTrue.SignUpRequest) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct Session : Swift.Codable, Swift.Equatable {
+  public var providerToken: Swift.String?
+  public var accessToken: Swift.String
+  public var tokenType: Swift.String
+  public var expiresIn: Swift.Double
+  public var refreshToken: Swift.String
+  public var user: GoTrue.User
+  public init(providerToken: Swift.String? = nil, accessToken: Swift.String, tokenType: Swift.String, expiresIn: Swift.Double, refreshToken: Swift.String, user: GoTrue.User)
+  public static func == (a: GoTrue.Session, b: GoTrue.Session) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct User : Swift.Codable, Swift.Equatable {
+  public var id: Foundation.UUID
+  public var appMetadata: [Swift.String : GoTrue.AnyJSON]
+  public var userMetadata: [Swift.String : GoTrue.AnyJSON]
+  public var aud: Swift.String
+  public var confirmationSentAt: Foundation.Date?
+  public var recoverySentAt: Foundation.Date?
+  public var emailChangeSentAt: Foundation.Date?
+  public var newEmail: Swift.String?
+  public var invitedAt: Foundation.Date?
+  public var actionLink: Swift.String?
+  public var email: Swift.String?
+  public var phone: Swift.String?
+  public var createdAt: Foundation.Date
+  public var confirmedAt: Foundation.Date?
+  public var emailConfirmedAt: Foundation.Date?
+  public var phoneConfirmedAt: Foundation.Date?
+  public var lastSignInAt: Foundation.Date?
+  public var role: Swift.String?
+  public var updatedAt: Foundation.Date
+  public var identities: [GoTrue.UserIdentity]?
+  public init(id: Foundation.UUID, appMetadata: [Swift.String : GoTrue.AnyJSON], userMetadata: [Swift.String : GoTrue.AnyJSON], aud: Swift.String, confirmationSentAt: Foundation.Date? = nil, recoverySentAt: Foundation.Date? = nil, emailChangeSentAt: Foundation.Date? = nil, newEmail: Swift.String? = nil, invitedAt: Foundation.Date? = nil, actionLink: Swift.String? = nil, email: Swift.String? = nil, phone: Swift.String? = nil, createdAt: Foundation.Date, confirmedAt: Foundation.Date? = nil, emailConfirmedAt: Foundation.Date? = nil, phoneConfirmedAt: Foundation.Date? = nil, lastSignInAt: Foundation.Date? = nil, role: Swift.String? = nil, updatedAt: Foundation.Date, identities: [GoTrue.UserIdentity]? = nil)
+  public static func == (a: GoTrue.User, b: GoTrue.User) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct UserIdentity : Swift.Codable, Swift.Equatable {
+  public var id: Foundation.UUID
+  public var userID: Foundation.UUID
+  public var identityData: [Swift.String : GoTrue.AnyJSON]
+  public var provider: GoTrue.Provider
+  public var createdAt: Foundation.Date
+  public var lastSignInAt: Foundation.Date
+  public var updatedAt: Foundation.Date
+  public init(id: Foundation.UUID, userID: Foundation.UUID, identityData: [Swift.String : GoTrue.AnyJSON], provider: GoTrue.Provider, createdAt: Foundation.Date, lastSignInAt: Foundation.Date, updatedAt: Foundation.Date)
+  public static func == (a: GoTrue.UserIdentity, b: GoTrue.UserIdentity) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public enum Provider : Swift.String, Swift.Codable, Swift.CaseIterable {
+  case apple
+  case azure
+  case bitbucket
+  case discord
+  case email
+  case facebook
+  case github
+  case gitlab
+  case google
+  case keycloak
+  case linkedin
+  case notion
+  case slack
+  case spotify
+  case twitch
+  case twitter
+  case workos
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [GoTrue.Provider]
+  public typealias RawValue = Swift.String
+  public static var allCases: [GoTrue.Provider] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct OpenIDConnectCredentials : Swift.Codable, Swift.Equatable {
+  public var idToken: Swift.String
+  public var nonce: Swift.String
+  public var clientID: Swift.String?
+  public var issuer: Swift.String?
+  public var provider: GoTrue.Provider?
+  public init(idToken: Swift.String, nonce: Swift.String, clientID: Swift.String? = nil, issuer: Swift.String? = nil, provider: GoTrue.Provider? = nil)
+  public static func == (a: GoTrue.OpenIDConnectCredentials, b: GoTrue.OpenIDConnectCredentials) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct GoTrueMetaSecurity : Swift.Codable, Swift.Equatable {
+  public var hcaptchaToken: Swift.String
+  public init(hcaptchaToken: Swift.String)
+  public static func == (a: GoTrue.GoTrueMetaSecurity, b: GoTrue.GoTrueMetaSecurity) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct OTPParams : Swift.Codable, Swift.Equatable {
+  public var email: Swift.String?
+  public var phone: Swift.String?
+  public var createUser: Swift.Bool
+  public var gotrueMetaSecurity: GoTrue.GoTrueMetaSecurity?
+  public init(email: Swift.String? = nil, phone: Swift.String? = nil, createUser: Swift.Bool? = nil, gotrueMetaSecurity: GoTrue.GoTrueMetaSecurity? = nil)
+  public init(from decoder: Swift.Decoder) throws
+  public static func == (a: GoTrue.OTPParams, b: GoTrue.OTPParams) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct VerifyMobileOTPParams : Swift.Codable, Swift.Equatable {
+  public var phone: Swift.String
+  public var token: Swift.String
+  public var type: GoTrue.VerifyMobileOTPParams.`Type`
+  public enum `Type` : Swift.String, Swift.Codable, Swift.CaseIterable {
+    case sms
+    case phoneChange
+    public init?(rawValue: Swift.String)
+    public typealias AllCases = [GoTrue.VerifyMobileOTPParams.`Type`]
+    public typealias RawValue = Swift.String
+    public static var allCases: [GoTrue.VerifyMobileOTPParams.`Type`] {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public init(phone: Swift.String, token: Swift.String, type: GoTrue.VerifyMobileOTPParams.`Type`)
+  public static func == (a: GoTrue.VerifyMobileOTPParams, b: GoTrue.VerifyMobileOTPParams) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct VerifyEmailOTPParams : Swift.Codable, Swift.Equatable {
+  public var email: Swift.String
+  public var token: Swift.String
+  public var type: GoTrue.VerifyEmailOTPParams.`Type`
+  public enum `Type` : Swift.String, Swift.Codable, Swift.CaseIterable {
+    case signup
+    case invite
+    case magiclink
+    case recovery
+    case emailChange
+    public init?(rawValue: Swift.String)
+    public typealias AllCases = [GoTrue.VerifyEmailOTPParams.`Type`]
+    public typealias RawValue = Swift.String
+    public static var allCases: [GoTrue.VerifyEmailOTPParams.`Type`] {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public init(email: Swift.String, token: Swift.String, type: GoTrue.VerifyEmailOTPParams.`Type`)
+  public static func == (a: GoTrue.VerifyEmailOTPParams, b: GoTrue.VerifyEmailOTPParams) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public enum VerifyOTPParams : Swift.Codable, Swift.Equatable {
+  case verifyMobileOTPParams(GoTrue.VerifyMobileOTPParams)
+  case verifyEmailOTPParams(GoTrue.VerifyEmailOTPParams)
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+  public static func == (a: GoTrue.VerifyOTPParams, b: GoTrue.VerifyOTPParams) -> Swift.Bool
+}
+public enum SessionOrUser : Swift.Codable, Swift.Equatable {
+  case session(GoTrue.Session)
+  case user(GoTrue.User)
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+  public static func == (a: GoTrue.SessionOrUser, b: GoTrue.SessionOrUser) -> Swift.Bool
+}
+public struct UserAttributes : Swift.Codable, Swift.Equatable {
+  public var email: Swift.String?
+  public var phone: Swift.String?
+  public var password: Swift.String?
+  public var emailChangeToken: Swift.String?
+  public var data: [Swift.String : GoTrue.AnyJSON]?
+  public init(email: Swift.String? = nil, phone: Swift.String? = nil, password: Swift.String? = nil, emailChangeToken: Swift.String? = nil, data: [Swift.String : GoTrue.AnyJSON]? = nil)
+  public static func == (a: GoTrue.UserAttributes, b: GoTrue.UserAttributes) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct RecoverParams : Swift.Codable, Swift.Equatable {
+  public var email: Swift.String
+  public var gotrueMetaSecurity: GoTrue.GoTrueMetaSecurity?
+  public init(email: Swift.String, gotrueMetaSecurity: GoTrue.GoTrueMetaSecurity? = nil)
+  public static func == (a: GoTrue.RecoverParams, b: GoTrue.RecoverParams) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public enum AnyJSON : Swift.Equatable, Swift.Codable {
+  case string(Swift.String)
+  case number(Swift.Double)
+  case object([Swift.String : GoTrue.AnyJSON])
+  case array([GoTrue.AnyJSON])
+  case bool(Swift.Bool)
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+  public static func == (a: GoTrue.AnyJSON, b: GoTrue.AnyJSON) -> Swift.Bool
+}
+@_hasMissingDesignatedInitializers final public class GoTrueClient {
+  final public var authEventChange: Combine.AnyPublisher<Combine.Publishers.Share<Combine.CurrentValueSubject<GoTrue.AuthChangeEvent, Swift.Never>>.Output, Combine.Publishers.Share<Combine.CurrentValueSubject<GoTrue.AuthChangeEvent, Swift.Never>>.Failure> {
+    get
+    set
+  }
+  final public var session: GoTrue.Session? {
+    get
+  }
+  convenience public init(url: Foundation.URL, headers: [Swift.String : Swift.String] = [:], keychainAccessGroup: Swift.String? = nil)
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  final public func signUp(email: Swift.String, password: Swift.String) async throws -> GoTrue.SessionOrUser
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  final public func signUp(phone: Swift.String, password: Swift.String) async throws -> GoTrue.SessionOrUser
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  final public func signIn(email: Swift.String, password: Swift.String) async throws -> GoTrue.Session
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  final public func signIn(phone: Swift.String, password: Swift.String) async throws -> GoTrue.Session
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func signIn(email: Swift.String, redirectURL: Foundation.URL? = nil) async throws
+  #endif
+
+  final public func signIn(provider: GoTrue.Provider, scopes: Swift.String? = nil, redirectURL: Foundation.URL? = nil, queryParams: [(name: Swift.String, value: Swift.String?)] = []) throws -> Foundation.URL
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  final public func refreshSession(refreshToken: Swift.String) async throws -> GoTrue.Session
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func refreshCurrentSessionIfNeeded() async throws
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  final public func session(from url: Foundation.URL) async throws -> GoTrue.Session
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func signOut() async throws
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  final public func verifyOTP(params: GoTrue.VerifyOTPParams) async throws -> GoTrue.SessionOrUser
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  final public func update(user: GoTrue.UserAttributes) async throws -> GoTrue.User
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func resetPasswordForEmail(_ email: Swift.String, redirectURL: Foundation.URL? = nil, captchaToken: Swift.String? = nil) async throws
+  #endif
+
+  @objc deinit
+}
+public struct GoTrueError : Foundation.LocalizedError, Swift.Decodable {
+  public var message: Swift.String?
+  public var msg: Swift.String?
+  public var code: Swift.Int?
+  public var error: Swift.String?
+  public var errorDescription: Swift.String?
+  public init(from decoder: Swift.Decoder) throws
+}
+extension Foundation.JSONDecoder {
+  public static let goTrue: Foundation.JSONDecoder
+}
+extension Foundation.JSONEncoder {
+  public static let goTrue: Foundation.JSONEncoder
+}
+extension GoTrue.AuthChangeEvent : Swift.Equatable {}
+extension GoTrue.AuthChangeEvent : Swift.Hashable {}
+extension GoTrue.AuthChangeEvent : Swift.RawRepresentable {}
+extension GoTrue.Provider : Swift.Equatable {}
+extension GoTrue.Provider : Swift.Hashable {}
+extension GoTrue.Provider : Swift.RawRepresentable {}
+extension GoTrue.VerifyMobileOTPParams.`Type` : Swift.Equatable {}
+extension GoTrue.VerifyMobileOTPParams.`Type` : Swift.Hashable {}
+extension GoTrue.VerifyMobileOTPParams.`Type` : Swift.RawRepresentable {}
+extension GoTrue.VerifyEmailOTPParams.`Type` : Swift.Equatable {}
+extension GoTrue.VerifyEmailOTPParams.`Type` : Swift.Hashable {}
+extension GoTrue.VerifyEmailOTPParams.`Type` : Swift.RawRepresentable {}

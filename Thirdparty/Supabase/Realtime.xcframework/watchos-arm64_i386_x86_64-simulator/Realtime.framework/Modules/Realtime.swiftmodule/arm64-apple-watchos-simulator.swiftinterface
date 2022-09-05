@@ -1,0 +1,284 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-module-flags: -target arm64-apple-watchos2.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Realtime
+import Foundation
+import Starscream
+import Swift
+import _Concurrency
+@_hasMissingDesignatedInitializers public class Channel {
+  final public let topic: Realtime.ChannelTopic
+  public var params: [Swift.String : Any] {
+    get
+    set
+  }
+  @objc deinit
+  public var onMessage: (_ message: Realtime.Message) -> Realtime.Message
+  @discardableResult
+  public func subscribe(timeout: Foundation.TimeInterval? = nil) -> Realtime.Push
+  @discardableResult
+  public func onClose(_ callback: @escaping ((Realtime.Message) -> Swift.Void)) -> Swift.Int
+  @discardableResult
+  public func delegateOnClose<Target>(to owner: Target, callback: @escaping ((Target, Realtime.Message) -> Swift.Void)) -> Swift.Int where Target : AnyObject
+  @discardableResult
+  public func onError(_ callback: @escaping ((_ message: Realtime.Message) -> Swift.Void)) -> Swift.Int
+  @discardableResult
+  public func delegateOnError<Target>(to owner: Target, callback: @escaping ((Target, Realtime.Message) -> Swift.Void)) -> Swift.Int where Target : AnyObject
+  @discardableResult
+  public func on(_ event: Realtime.ChannelEvent, callback: @escaping ((Realtime.Message) -> Swift.Void)) -> Swift.Int
+  @discardableResult
+  public func delegateOn<Target>(_ event: Realtime.ChannelEvent, to owner: Target, callback: @escaping ((Target, Realtime.Message) -> Swift.Void)) -> Swift.Int where Target : AnyObject
+  public func off(_ event: Realtime.ChannelEvent, ref: Swift.Int? = nil)
+  @discardableResult
+  public func push(_ event: Realtime.ChannelEvent, payload: [Swift.String : Any], timeout: Foundation.TimeInterval = Defaults.timeoutInterval) -> Realtime.Push
+  @discardableResult
+  public func unsubscribe(timeout: Foundation.TimeInterval = Defaults.timeoutInterval) -> Realtime.Push
+  public func onMessage(callback: @escaping (Realtime.Message) -> Realtime.Message)
+}
+extension Realtime.Channel {
+  public var isClosed: Swift.Bool {
+    get
+  }
+  public var isErrored: Swift.Bool {
+    get
+  }
+  public var isJoined: Swift.Bool {
+    get
+  }
+  public var isJoining: Swift.Bool {
+    get
+  }
+  public var isLeaving: Swift.Bool {
+    get
+  }
+}
+public enum Defaults {
+  public static let timeoutInterval: Swift.Double
+  public static let heartbeatInterval: Swift.Double
+  public static let reconnectSteppedBackOff: (_ tries: Swift.Int) -> Foundation.TimeInterval
+  public static let rejoinSteppedBackOff: (_ tries: Swift.Int) -> Foundation.TimeInterval
+  public static let encode: (_ json: [Swift.String : Any]) -> Foundation.Data
+  public static let decode: (_ data: Foundation.Data) -> [Swift.String : Any]?
+}
+public enum ChannelState : Swift.String {
+  case closed
+  case errored
+  case joined
+  case joining
+  case leaving
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum ChannelEvent : Swift.RawRepresentable {
+  case heartbeat
+  case join
+  case leave
+  case reply
+  case error
+  case close
+  case all
+  case insert
+  case update
+  case delete
+  case channelReply(Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+}
+public enum ChannelTopic : Swift.RawRepresentable, Swift.Equatable {
+  case all
+  case schema(_: Swift.String)
+  case table(_: Swift.String, schema: Swift.String)
+  case column(_: Swift.String, value: Swift.String, table: Swift.String, schema: Swift.String)
+  case heartbeat
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+}
+public struct Delegated<Input, Output> {
+  public init()
+  public mutating func delegate<Target>(to target: Target, with callback: @escaping (Target, Input) -> Output) where Target : AnyObject
+  public func call(_ input: Input) -> Output?
+  public var isDelegateSet: Swift.Bool {
+    get
+  }
+}
+extension Realtime.Delegated {
+  public mutating func stronglyDelegate<Target>(to target: Target, with callback: @escaping (Target, Input) -> Output) where Target : AnyObject
+  public mutating func manuallyDelegate(with callback: @escaping (Input) -> Output)
+  public mutating func removeDelegate()
+}
+extension Realtime.Delegated where Input == Swift.Void {
+  public mutating func delegate<Target>(to target: Target, with callback: @escaping (Target) -> Output) where Target : AnyObject
+  public mutating func stronglyDelegate<Target>(to target: Target, with callback: @escaping (Target) -> Output) where Target : AnyObject
+}
+extension Realtime.Delegated where Input == Swift.Void {
+  public func call() -> Output?
+}
+extension Realtime.Delegated where Output == Swift.Void {
+  public func call(_ input: Input)
+}
+extension Realtime.Delegated where Input == Swift.Void, Output == Swift.Void {
+  public func call()
+}
+@_hasMissingDesignatedInitializers public class Message {
+  final public let ref: Swift.String
+  final public let topic: Realtime.ChannelTopic
+  final public let event: Realtime.ChannelEvent
+  public var payload: [Swift.String : Any]
+  public var status: Swift.String? {
+    get
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class Push {
+  weak public var channel: Realtime.Channel?
+  final public let event: Realtime.ChannelEvent
+  public var payload: [Swift.String : Any]
+  public var timeout: Foundation.TimeInterval
+  public func resend(_ timeout: Foundation.TimeInterval = Defaults.timeoutInterval)
+  public func send()
+  @discardableResult
+  public func receive(_ status: Swift.String, callback: @escaping ((Realtime.Message) -> Swift.Void)) -> Realtime.Push
+  @discardableResult
+  public func delegateReceive<Target>(_ status: Swift.String, to owner: Target, callback: @escaping ((Target, Realtime.Message) -> Swift.Void)) -> Realtime.Push where Target : AnyObject
+  @objc deinit
+}
+public class RealtimeClient : Realtime.TransportDelegate {
+  final public let endPoint: Swift.String
+  public var endPointUrl: Foundation.URL {
+    get
+  }
+  public var params: [Swift.String : Any]?
+  public var encode: ([Swift.String : Any]) -> Foundation.Data
+  public var decode: (Foundation.Data) -> [Swift.String : Any]?
+  public var timeout: Foundation.TimeInterval
+  public var heartbeatInterval: Foundation.TimeInterval
+  public var reconnectAfter: (Swift.Int) -> Foundation.TimeInterval
+  public var rejoinAfter: (Swift.Int) -> Foundation.TimeInterval
+  public var logger: ((Swift.String) -> Swift.Void)?
+  public var skipHeartbeat: Swift.Bool
+  public var disableSSLCertValidation: Swift.Bool
+  public var enabledSSLCipherSuites: [Security.SSLCipherSuite]?
+  public init(endPoint: Swift.String, params: [Swift.String : Any]? = nil)
+  @objc deinit
+  public var websocketProtocol: Swift.String {
+    get
+  }
+  public var isConnected: Swift.Bool {
+    get
+  }
+  public func connect()
+  public func disconnect(code: Realtime.RealtimeClient.CloseCode = CloseCode.normal, callback: (() -> Swift.Void)? = nil)
+  @discardableResult
+  public func onOpen(callback: @escaping () -> Swift.Void) -> Swift.String
+  @discardableResult
+  public func delegateOnOpen<T>(to owner: T, callback: @escaping ((T) -> Swift.Void)) -> Swift.String where T : AnyObject
+  @discardableResult
+  public func onClose(callback: @escaping () -> Swift.Void) -> Swift.String
+  @discardableResult
+  public func delegateOnClose<T>(to owner: T, callback: @escaping ((T) -> Swift.Void)) -> Swift.String where T : AnyObject
+  @discardableResult
+  public func onError(callback: @escaping (Swift.Error) -> Swift.Void) -> Swift.String
+  @discardableResult
+  public func delegateOnError<T>(to owner: T, callback: @escaping ((T, Swift.Error) -> Swift.Void)) -> Swift.String where T : AnyObject
+  @discardableResult
+  public func onMessage(callback: @escaping (Realtime.Message) -> Swift.Void) -> Swift.String
+  @discardableResult
+  public func delegateOnMessage<T>(to owner: T, callback: @escaping ((T, Realtime.Message) -> Swift.Void)) -> Swift.String where T : AnyObject
+  public func releaseCallbacks()
+  public func channel(_ topic: Realtime.ChannelTopic, params: [Swift.String : Any] = [:]) -> Realtime.Channel
+  public func remove(_ channel: Realtime.Channel)
+  public func off(_ refs: [Swift.String])
+  public func makeRef() -> Swift.String
+  public func onOpen()
+  public func onError(error: Swift.Error)
+  public func onMessage(message: Swift.String)
+  public func onClose(code: Swift.Int)
+}
+extension Realtime.RealtimeClient {
+  public enum CloseCode : Swift.Int {
+    case abnormal
+    case normal
+    case goingAway
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+}
+public enum SocketError : Swift.Error {
+  case abnormalClosureError
+  public static func == (a: Realtime.SocketError, b: Realtime.SocketError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public protocol Transport {
+  var readyState: Realtime.TransportReadyState { get }
+  var delegate: Realtime.TransportDelegate? { get set }
+  func connect()
+  func disconnect(code: Swift.Int, reason: Swift.String?)
+  func send(data: Foundation.Data)
+}
+public protocol TransportDelegate {
+  func onOpen()
+  func onError(error: Swift.Error)
+  func onMessage(message: Swift.String)
+  func onClose(code: Swift.Int)
+}
+public enum TransportReadyState {
+  case connecting
+  case open
+  case closing
+  case closed
+  public static func == (a: Realtime.TransportReadyState, b: Realtime.TransportReadyState) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+public class URLSessionTransport : ObjectiveC.NSObject, Realtime.Transport, Foundation.URLSessionWebSocketDelegate {
+  public var readyState: Realtime.TransportReadyState
+  public var delegate: Realtime.TransportDelegate?
+  public func connect()
+  public func disconnect(code: Swift.Int, reason: Swift.String?)
+  public func send(data: Foundation.Data)
+  @objc public func urlSession(_: Foundation.URLSession, webSocketTask _: Foundation.URLSessionWebSocketTask, didOpenWithProtocol _: Swift.String?)
+  @objc public func urlSession(_: Foundation.URLSession, webSocketTask _: Foundation.URLSessionWebSocketTask, didCloseWith closeCode: Foundation.URLSessionWebSocketTask.CloseCode, reason _: Foundation.Data?)
+  @objc public func urlSession(_: Foundation.URLSession, task _: Foundation.URLSessionTask, didCompleteWithError error: Swift.Error?)
+  @objc deinit
+}
+@objc public class StarscreamTransport : ObjectiveC.NSObject, Realtime.Transport, Starscream.WebSocketDelegate {
+  public init(url: Foundation.URL)
+  public var readyState: Realtime.TransportReadyState
+  public var delegate: Realtime.TransportDelegate?
+  public func connect()
+  public func disconnect(code: Swift.Int, reason _: Swift.String?)
+  public func send(data: Foundation.Data)
+  public func websocketDidConnect(socket _: Starscream.WebSocketClient)
+  public func websocketDidDisconnect(socket _: Starscream.WebSocketClient, error: Swift.Error?)
+  public func didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocket)
+  public func websocketDidReceiveMessage(socket _: Starscream.WebSocketClient, text: Swift.String)
+  public func websocketDidReceiveData(socket _: Starscream.WebSocketClient, data _: Foundation.Data)
+  @objc deinit
+}
+extension Realtime.ChannelState : Swift.Equatable {}
+extension Realtime.ChannelState : Swift.Hashable {}
+extension Realtime.ChannelState : Swift.RawRepresentable {}
+extension Realtime.RealtimeClient.CloseCode : Swift.Equatable {}
+extension Realtime.RealtimeClient.CloseCode : Swift.Hashable {}
+extension Realtime.RealtimeClient.CloseCode : Swift.RawRepresentable {}
+extension Realtime.SocketError : Swift.Equatable {}
+extension Realtime.SocketError : Swift.Hashable {}
+extension Realtime.TransportReadyState : Swift.Equatable {}
+extension Realtime.TransportReadyState : Swift.Hashable {}

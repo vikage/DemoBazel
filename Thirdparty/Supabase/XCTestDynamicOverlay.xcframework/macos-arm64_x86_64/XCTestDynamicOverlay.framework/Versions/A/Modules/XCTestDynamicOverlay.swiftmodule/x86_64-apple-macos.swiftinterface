@@ -1,0 +1,192 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-module-flags: -target x86_64-apple-macos10.15 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name XCTestDynamicOverlay
+import Foundation
+import Swift
+import _Concurrency
+public func XCTFail(_ message: Swift.String = "")
+public func XCTFail(_ message: Swift.String = "", file: Swift.StaticString, line: Swift.UInt)
+public let _XCTIsTesting: Swift.Bool
+
+#if compiler(>=5.3) && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", placeholder: @autoclosure @escaping @Sendable () -> Result) -> @Sendable () -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", file: Swift.StaticString = #file, line: Swift.UInt = #line) -> @Sendable () -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", placeholder: @autoclosure @escaping @Sendable () -> Result) -> @Sendable (A) -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", file: Swift.StaticString = #file, line: Swift.UInt = #line) -> @Sendable (A) -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", placeholder: @autoclosure @escaping @Sendable () -> Result) -> @Sendable (A, B) -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", file: Swift.StaticString = #file, line: Swift.UInt = #line) -> @Sendable (A, B) -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, C, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", placeholder: @autoclosure @escaping @Sendable () -> Result) -> @Sendable (A, B, C) -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, C, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", file: Swift.StaticString = #file, line: Swift.UInt = #line) -> @Sendable (A, B, C) -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, C, D, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", placeholder: @autoclosure @escaping @Sendable () -> Result) -> @Sendable (A, B, C, D) -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, C, D, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", file: Swift.StaticString = #file, line: Swift.UInt = #line) -> @Sendable (A, B, C, D) -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, C, D, E, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", placeholder: @autoclosure @escaping @Sendable () -> Result) -> @Sendable (A, B, C, D, E) -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, C, D, E, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", file: Swift.StaticString = #file, line: Swift.UInt = #line) -> @Sendable (A, B, C, D, E) -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+public func XCTUnimplemented<Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "") -> @Sendable () throws -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+public func XCTUnimplemented<A, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "") -> @Sendable (A) throws -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+public func XCTUnimplemented<A, B, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "") -> @Sendable (A, B) throws -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+public func XCTUnimplemented<A, B, C, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "") -> @Sendable (A, B, C) throws -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+public func XCTUnimplemented<A, B, C, D, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "") -> @Sendable (A, B, C, D) throws -> Result
+#endif
+
+
+#if compiler(>=5.3) && $Sendable
+public func XCTUnimplemented<A, B, C, D, E, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "") -> @Sendable (A, B, C, D, E) throws -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", placeholder: @autoclosure @escaping @Sendable () -> Result) -> @Sendable () async -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", file: Swift.StaticString = #file, line: Swift.UInt = #line) -> @Sendable () async -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", placeholder: @autoclosure @escaping @Sendable () -> Result) -> @Sendable (A) async -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", file: Swift.StaticString = #file, line: Swift.UInt = #line) -> @Sendable (A) async -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", placeholder: @autoclosure @escaping @Sendable () -> Result) -> @Sendable (A, B) async -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", file: Swift.StaticString = #file, line: Swift.UInt = #line) -> @Sendable (A, B) async -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, C, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", placeholder: @autoclosure @escaping @Sendable () -> Result) -> @Sendable (A, B, C) async -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, C, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", file: Swift.StaticString = #file, line: Swift.UInt = #line) -> @Sendable (A, B, C) async -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, C, D, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", placeholder: @autoclosure @escaping @Sendable () -> Result) -> @Sendable (A, B, C, D) async -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, C, D, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", file: Swift.StaticString = #file, line: Swift.UInt = #line) -> @Sendable (A, B, C, D) async -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, C, D, E, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", placeholder: @autoclosure @escaping @Sendable () -> Result) -> @Sendable (A, B, C, D, E) async -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+@_disfavoredOverload public func XCTUnimplemented<A, B, C, D, E, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "", file: Swift.StaticString = #file, line: Swift.UInt = #line) -> @Sendable (A, B, C, D, E) async -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+public func XCTUnimplemented<Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "") -> @Sendable () async throws -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+public func XCTUnimplemented<A, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "") -> @Sendable (A) async throws -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+public func XCTUnimplemented<A, B, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "") -> @Sendable (A, B) async throws -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+public func XCTUnimplemented<A, B, C, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "") -> @Sendable (A, B, C) async throws -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+public func XCTUnimplemented<A, B, C, D, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "") -> @Sendable (A, B, C, D) async throws -> Result
+#endif
+
+
+#if compiler(>=5.3) && $AsyncAwait && $Sendable
+public func XCTUnimplemented<A, B, C, D, E, Result>(_ description: @autoclosure @escaping @Sendable () -> Swift.String = "") -> @Sendable (A, B, C, D, E) async throws -> Result
+#endif
+
+public struct XCTUnimplementedFailure : Swift.Error {
+  public let description: Swift.String
+}

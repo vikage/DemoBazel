@@ -15,7 +15,7 @@ swift_library(
     deps = [
         "//Lib/Logging:TLLogging",
         "//ProjectManagement",
-        "//Thirdparty/Firebase:Firebase",
+        "//Thirdparty/Supabase:Supabase",
     ],
 )
 

@@ -1,0 +1,194 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Get
+import Foundation
+import Swift
+import _Concurrency
+
+#if compiler(>=5.3) && $Actors
+public actor APIClient {
+  nonisolated final public let configuration: Get.APIClient.Configuration
+  nonisolated final public let session: Foundation.URLSession
+  public struct Configuration : @unchecked Swift.Sendable {
+    public var baseURL: Foundation.URL?
+    public var delegate: Get.APIClientDelegate?
+    public var sessionConfiguration: Foundation.URLSessionConfiguration
+    public var sessionDelegate: Foundation.URLSessionDelegate?
+    public var sessionDelegateQueue: Foundation.OperationQueue?
+    public var decoder: Foundation.JSONDecoder
+    public var encoder: Foundation.JSONEncoder
+    public init(baseURL: Foundation.URL?, sessionConfiguration: Foundation.URLSessionConfiguration = .default, delegate: Get.APIClientDelegate? = nil)
+  }
+  convenience public init(baseURL: Foundation.URL?, _ configure: (inout Get.APIClient.Configuration) -> Swift.Void = { _ in })
+  public init(configuration: Get.APIClient.Configuration)
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  public func send<T>(_ request: Get.Request<T>, delegate: Foundation.URLSessionDataDelegate? = nil, configure: ((inout Foundation.URLRequest) throws -> Swift.Void)? = nil) async throws -> Get.Response<T> where T : Swift.Decodable
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  public func send(_ request: Get.Request<Swift.Void>, delegate: Foundation.URLSessionDataDelegate? = nil, configure: ((inout Foundation.URLRequest) throws -> Swift.Void)? = nil) async throws -> Get.Response<Swift.Void>
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func data<T>(for request: Get.Request<T>, delegate: Foundation.URLSessionDataDelegate? = nil, configure: ((inout Foundation.URLRequest) throws -> Swift.Void)? = nil) async throws -> Get.Response<Foundation.Data>
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func download<T>(for request: Get.Request<T>, delegate: Foundation.URLSessionDownloadDelegate? = nil, configure: ((inout Foundation.URLRequest) throws -> Swift.Void)? = nil) async throws -> Get.Response<Foundation.URL>
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func download(resumeFrom resumeData: Foundation.Data, delegate: Foundation.URLSessionDownloadDelegate? = nil) async throws -> Get.Response<Foundation.URL>
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  public func upload<T>(for request: Get.Request<T>, fromFile fileURL: Foundation.URL, delegate: Foundation.URLSessionTaskDelegate? = nil, configure: ((inout Foundation.URLRequest) throws -> Swift.Void)? = nil) async throws -> Get.Response<T> where T : Swift.Decodable
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  public func upload(for request: Get.Request<Swift.Void>, fromFile fileURL: Foundation.URL, delegate: Foundation.URLSessionTaskDelegate? = nil, configure: ((inout Foundation.URLRequest) throws -> Swift.Void)? = nil) async throws -> Get.Response<Swift.Void>
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  public func upload<T>(for request: Get.Request<T>, from data: Foundation.Data, delegate: Foundation.URLSessionTaskDelegate? = nil, configure: ((inout Foundation.URLRequest) throws -> Swift.Void)? = nil) async throws -> Get.Response<T> where T : Swift.Decodable
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  public func upload(for request: Get.Request<Swift.Void>, from data: Foundation.Data, delegate: Foundation.URLSessionTaskDelegate? = nil, configure: ((inout Foundation.URLRequest) throws -> Swift.Void)? = nil) async throws -> Get.Response<Swift.Void>
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func makeURLRequest<T>(for request: Get.Request<T>) async throws -> Foundation.URLRequest
+  #endif
+
+  @objc deinit
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  @_semantics("defaultActor") nonisolated final public var unownedExecutor: _Concurrency.UnownedSerialExecutor {
+    get
+  }
+}
+#endif
+
+public enum APIError : Swift.Error, Foundation.LocalizedError {
+  case unacceptableStatusCode(Swift.Int)
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public protocol APIClientDelegate {
+  
+  #if compiler(>=5.3) && $AsyncAwait && $Actors
+  func client(_ client: Get.APIClient, willSendRequest request: inout Foundation.URLRequest) async throws
+  #endif
+
+  
+  #if compiler(>=5.3) && $Actors
+  func client(_ client: Get.APIClient, validateResponse response: Foundation.HTTPURLResponse, data: Foundation.Data, task: Foundation.URLSessionTask) throws
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait && $Actors
+  func client(_ client: Get.APIClient, shouldRetry task: Foundation.URLSessionTask, error: Swift.Error, attempts: Swift.Int) async throws -> Swift.Bool
+  #endif
+
+  
+  #if compiler(>=5.3) && $Actors
+  func client<T>(_ client: Get.APIClient, makeURLForRequest request: Get.Request<T>) throws -> Foundation.URL?
+  #endif
+
+}
+extension Get.APIClientDelegate {
+  
+  #if compiler(>=5.3) && $AsyncAwait && $Actors
+  public func client(_ client: Get.APIClient, willSendRequest request: inout Foundation.URLRequest) async throws
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait && $Actors
+  public func client(_ client: Get.APIClient, shouldRetry task: Foundation.URLSessionTask, error: Swift.Error, attempts: Swift.Int) async throws -> Swift.Bool
+  #endif
+
+  
+  #if compiler(>=5.3) && $Actors
+  public func client(_ client: Get.APIClient, validateResponse response: Foundation.HTTPURLResponse, data: Foundation.Data, task: Foundation.URLSessionTask) throws
+  #endif
+
+  
+  #if compiler(>=5.3) && $Actors
+  public func client<T>(_ client: Get.APIClient, makeURLForRequest request: Get.Request<T>) throws -> Foundation.URL?
+  #endif
+
+}
+public struct Request<Response> : @unchecked Swift.Sendable {
+  public var method: Get.HTTPMethod
+  public var url: Foundation.URL?
+  public var query: [(Swift.String, Swift.String?)]?
+  public var body: Swift.Encodable?
+  public var headers: [Swift.String : Swift.String]?
+  public var id: Swift.String?
+  public init(url: Foundation.URL, method: Get.HTTPMethod = .get, query: [(Swift.String, Swift.String?)]? = nil, body: Swift.Encodable? = nil, headers: [Swift.String : Swift.String]? = nil, id: Swift.String? = nil)
+  public init(path: Swift.String, method: Get.HTTPMethod = .get, query: [(Swift.String, Swift.String?)]? = nil, body: Swift.Encodable? = nil, headers: [Swift.String : Swift.String]? = nil, id: Swift.String? = nil)
+  public func withResponse<T>(_ type: T.Type) -> Get.Request<T>
+}
+extension Get.Request where Response == Swift.Void {
+  public init(url: Foundation.URL, method: Get.HTTPMethod = .get, query: [(Swift.String, Swift.String?)]? = nil, body: Swift.Encodable? = nil, headers: [Swift.String : Swift.String]? = nil, id: Swift.String? = nil)
+  public init(path: Swift.String, method: Get.HTTPMethod = .get, query: [(Swift.String, Swift.String?)]? = nil, body: Swift.Encodable? = nil, headers: [Swift.String : Swift.String]? = nil, id: Swift.String? = nil)
+}
+public struct HTTPMethod : Swift.RawRepresentable, Swift.Hashable, Swift.ExpressibleByStringLiteral {
+  public let rawValue: Swift.String
+  public init(rawValue: Swift.String)
+  public init(stringLiteral value: Swift.String)
+  public static let get: Get.HTTPMethod
+  public static let post: Get.HTTPMethod
+  public static let patch: Get.HTTPMethod
+  public static let put: Get.HTTPMethod
+  public static let delete: Get.HTTPMethod
+  public static let options: Get.HTTPMethod
+  public static let head: Get.HTTPMethod
+  public static let trace: Get.HTTPMethod
+  public typealias ExtendedGraphemeClusterLiteralType = Swift.String
+  public typealias RawValue = Swift.String
+  public typealias StringLiteralType = Swift.String
+  public typealias UnicodeScalarLiteralType = Swift.String
+}
+public struct Response<T> {
+  public let value: T
+  public let response: Foundation.URLResponse
+  public var statusCode: Swift.Int? {
+    get
+  }
+  public let data: Foundation.Data
+  public var originalRequest: Foundation.URLRequest? {
+    get
+  }
+  public var currentRequest: Foundation.URLRequest? {
+    get
+  }
+  public let task: Foundation.URLSessionTask
+  public let metrics: Foundation.URLSessionTaskMetrics?
+  public init(value: T, data: Foundation.Data, response: Foundation.URLResponse, task: Foundation.URLSessionTask, metrics: Foundation.URLSessionTaskMetrics? = nil)
+  public func map<U>(_ closure: (T) throws -> U) rethrows -> Get.Response<U>
+}
+extension Get.Response where T == Foundation.URL {
+  public var location: Foundation.URL {
+    get
+  }
+}
+extension Get.Response : @unchecked Swift.Sendable where T : Swift.Sendable {
+}
