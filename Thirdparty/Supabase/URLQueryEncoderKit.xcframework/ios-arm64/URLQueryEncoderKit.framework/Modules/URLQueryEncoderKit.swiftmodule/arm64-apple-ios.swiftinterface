@@ -1,0 +1,38 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name URLQueryEncoderKit
+import Foundation
+import Swift
+import _Concurrency
+final public class URLQueryEncoder {
+  final public var explode: Swift.Bool
+  final public var delimiter: Swift.String
+  final public var isDeepObject: Swift.Bool
+  final public var dateEncodingStrategy: URLQueryEncoderKit.URLQueryEncoder.DateEncodingStrategy
+  public enum DateEncodingStrategy {
+    case iso8601
+    case secondsSince1970
+    case millisecondsSince1970
+    case formatted(Foundation.DateFormatter)
+    case custom((Foundation.Date) -> Swift.String)
+  }
+  final public var queryItems: [Foundation.URLQueryItem] {
+    get
+  }
+  final public var items: [(Swift.String, Swift.String?)] {
+    get
+  }
+  final public var query: Swift.String? {
+    get
+  }
+  final public var percentEncodedQuery: Swift.String? {
+    get
+  }
+  public init(explode: Swift.Bool = true, delimiter: Swift.String = ",", isDeepObject: Swift.Bool = false)
+  @discardableResult
+  final public func encode<T>(_ value: T, forKey key: Swift.String) -> Self where T : Swift.Encodable
+  @discardableResult
+  final public func encode<T>(_ value: T, forKey key: Swift.String, explode: Swift.Bool? = nil, delimiter: Swift.String? = nil, isDeepObject: Swift.Bool? = nil) -> Self where T : Swift.Encodable
+  public static func encode<T>(_ body: T) -> URLQueryEncoderKit.URLQueryEncoder where T : Swift.Encodable
+  @objc deinit
+}

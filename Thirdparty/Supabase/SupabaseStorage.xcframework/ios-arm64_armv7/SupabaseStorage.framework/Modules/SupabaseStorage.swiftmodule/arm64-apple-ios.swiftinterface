@@ -1,0 +1,99 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name SupabaseStorage
+import Foundation
+import Swift
+import _Concurrency
+public struct Bucket {
+  public var id: Swift.String
+  public var name: Swift.String
+  public var owner: Swift.String
+  public var isPublic: Swift.Bool
+  public var createdAt: Swift.String
+  public var updatedAt: Swift.String
+}
+public struct FileObject {
+  public var name: Swift.String
+  public var bucket_id: Swift.String
+  public var owner: Swift.String
+  public var id: Swift.String
+  public var updated_at: Swift.String
+  public var created_at: Swift.String
+  public var last_accessed_at: Swift.String
+  public var metadata: [Swift.String : Any]
+  public var buckets: SupabaseStorage.Bucket?
+  public init?(from dictionary: [Swift.String : Any])
+}
+public struct FileOptions {
+  public var cacheControl: Swift.String
+  public init(cacheControl: Swift.String)
+}
+public struct File : Swift.Hashable, Swift.Equatable {
+  public var name: Swift.String
+  public var data: Foundation.Data
+  public var fileName: Swift.String?
+  public var contentType: Swift.String?
+  public init(name: Swift.String, data: Foundation.Data, fileName: Swift.String?, contentType: Swift.String?)
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: SupabaseStorage.File, b: SupabaseStorage.File) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public class FormData {
+  public init(boundary: Swift.String = UUID().uuidString)
+  public func append(file: SupabaseStorage.File)
+  public var contentType: Swift.String {
+    get
+  }
+  public var data: Foundation.Data {
+    get
+  }
+  @objc deinit
+}
+public struct SearchOptions {
+  public var limit: Swift.Int?
+  public var offset: Swift.Int?
+  public var sortBy: SupabaseStorage.SortBy?
+}
+public struct SortBy {
+  public var column: Swift.String?
+  public var order: Swift.String?
+}
+@_hasMissingDesignatedInitializers public class StorageApi {
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class StorageBucketApi : SupabaseStorage.StorageApi {
+  public func listBuckets(completion: @escaping (Swift.Result<[SupabaseStorage.Bucket], Swift.Error>) -> Swift.Void)
+  public func getBucket(id: Swift.String, completion: @escaping (Swift.Result<SupabaseStorage.Bucket, Swift.Error>) -> Swift.Void)
+  public func createBucket(id: Swift.String, completion: @escaping (Swift.Result<[Swift.String : Any], Swift.Error>) -> Swift.Void)
+  public func emptyBucket(id: Swift.String, completion: @escaping (Swift.Result<[Swift.String : Any], Swift.Error>) -> Swift.Void)
+  public func deleteBucket(id: Swift.String, completion: @escaping (Swift.Result<[Swift.String : Any], Swift.Error>) -> Swift.Void)
+  @objc deinit
+}
+public struct StorageError : Swift.Error {
+  public var statusCode: Swift.Int?
+  public var message: Swift.String?
+  public init(statusCode: Swift.Int? = nil, message: Swift.String? = nil)
+}
+extension SupabaseStorage.StorageError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class StorageFileApi : SupabaseStorage.StorageApi {
+  public func upload(path: Swift.String, file: SupabaseStorage.File, fileOptions: SupabaseStorage.FileOptions?, completion: @escaping (Swift.Result<Any, Swift.Error>) -> Swift.Void)
+  public func update(path: Swift.String, file: SupabaseStorage.File, fileOptions: SupabaseStorage.FileOptions?, completion: @escaping (Swift.Result<Any, Swift.Error>) -> Swift.Void)
+  public func move(fromPath: Swift.String, toPath: Swift.String, completion: @escaping (Swift.Result<[Swift.String : Any], Swift.Error>) -> Swift.Void)
+  public func createSignedUrl(path: Swift.String, expiresIn: Swift.Int, completion: @escaping (Swift.Result<Foundation.URL, Swift.Error>) -> Swift.Void)
+  public func remove(paths: [Swift.String], completion: @escaping (Swift.Result<[Swift.String : Any], Swift.Error>) -> Swift.Void)
+  public func list(path: Swift.String? = nil, options: SupabaseStorage.SearchOptions? = nil, completion: @escaping (Swift.Result<[SupabaseStorage.FileObject], Swift.Error>) -> Swift.Void)
+  @discardableResult
+  public func download(path: Swift.String, completion: @escaping (Swift.Result<Foundation.Data?, Swift.Error>) -> Swift.Void) -> Foundation.URLSessionDataTask?
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class SupabaseStorageClient : SupabaseStorage.StorageBucketApi {
+  public init(url: Swift.String, headers: [Swift.String : Swift.String])
+  public func from(id: Swift.String) -> SupabaseStorage.StorageFileApi
+  @objc deinit
+}

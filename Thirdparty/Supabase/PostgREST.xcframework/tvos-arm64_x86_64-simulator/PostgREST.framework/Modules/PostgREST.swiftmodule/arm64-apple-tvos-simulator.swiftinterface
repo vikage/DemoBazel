@@ -1,0 +1,225 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-module-flags: -target arm64-apple-tvos10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name PostgREST
+import AnyCodable
+import Foundation
+import Swift
+import _Concurrency
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+extension PostgREST.PostgrestBuilder {
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  public func execute(head: Swift.Bool = false, count: PostgREST.CountOption? = nil) async throws -> PostgREST.PostgrestResponse
+  #endif
+
+}
+public enum CountOption : Swift.String {
+  case exact
+  case planned
+  case estimated
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class PostgrestBuilder {
+  public func execute(head: Swift.Bool = false, count: PostgREST.CountOption? = nil, completion: @escaping (Swift.Result<PostgREST.PostgrestResponse, Swift.Error>) -> Swift.Void)
+  @objc deinit
+}
+extension Foundation.JSONEncoder {
+  public static var postgrest: Foundation.JSONEncoder
+}
+public class PostgrestClient {
+  public var config: PostgREST.PostgrestClient.PostgrestClientConfig
+  public struct PostgrestClientConfig {
+    public var url: Swift.String
+    public var headers: [Swift.String : Swift.String]
+    public var schema: Swift.String?
+    public var delegate: PostgREST.PostgrestClientDelegate
+    public init(url: Swift.String, headers: [Swift.String : Swift.String] = [:], schema: Swift.String?, delegate: PostgREST.PostgrestClientDelegate? = nil)
+  }
+  public init(url: Swift.String, headers: [Swift.String : Swift.String] = [:], schema: Swift.String?, delegate: PostgREST.PostgrestClientDelegate? = nil)
+  public init(config: PostgREST.PostgrestClient.PostgrestClientConfig)
+  public func auth(_ token: Swift.String) -> PostgREST.PostgrestClient
+  public func from(_ table: Swift.String) -> PostgREST.PostgrestQueryBuilder
+  public func rpc<U>(fn: Swift.String, params: U?, count: PostgREST.CountOption? = nil) -> PostgREST.PostgrestTransformBuilder where U : Swift.Encodable
+  public func rpc(fn: Swift.String, count: PostgREST.CountOption? = nil) -> PostgREST.PostgrestTransformBuilder
+  @objc deinit
+}
+public protocol PostgrestClientDelegate {
+  func client(_ client: PostgREST.PostgrestClient, willSendRequest request: Foundation.URLRequest, completion: @escaping (Foundation.URLRequest) -> Swift.Void)
+}
+extension PostgREST.PostgrestClientDelegate {
+  public func client(_ client: PostgREST.PostgrestClient, willSendRequest request: Foundation.URLRequest, completion: @escaping (Foundation.URLRequest) -> Swift.Void)
+}
+public struct PostgrestError : Swift.Error, Swift.Codable {
+  public let details: Swift.String?
+  public let hint: Swift.String?
+  public let code: Swift.String?
+  public let message: Swift.String
+  public init(details: Swift.String? = nil, hint: Swift.String? = nil, code: Swift.String? = nil, message: Swift.String)
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+extension PostgREST.PostgrestError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PostgrestFilterBuilder : PostgREST.PostgrestTransformBuilder {
+  public enum Operator : Swift.String, Swift.CaseIterable {
+    case eq, neq, gt, gte, lt, lte, like, ilike, `is`, `in`, cs, cd, sl, sr, nxl, nxr, adj, ov, fts, plfts, phfts, wfts
+    public init?(rawValue: Swift.String)
+    public typealias AllCases = [PostgREST.PostgrestFilterBuilder.Operator]
+    public typealias RawValue = Swift.String
+    public static var allCases: [PostgREST.PostgrestFilterBuilder.Operator] {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public func not(column: Swift.String, operator op: PostgREST.PostgrestFilterBuilder.Operator, value: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func or(filters: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func eq(column: Swift.String, value: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func neq(column: Swift.String, value: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func gt(column: Swift.String, value: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func gte(column: Swift.String, value: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func lt(column: Swift.String, value: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func lte(column: Swift.String, value: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func like(column: Swift.String, value: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func ilike(column: Swift.String, value: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func `is`(column: Swift.String, value: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func `in`(column: Swift.String, value: [PostgREST.URLQueryRepresentable]) -> PostgREST.PostgrestFilterBuilder
+  public func contains(column: Swift.String, value: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func rangeLt(column: Swift.String, range: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func rangeGt(column: Swift.String, range: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func rangeGte(column: Swift.String, range: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func rangeLte(column: Swift.String, range: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func rangeAdjacent(column: Swift.String, range: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func overlaps(column: Swift.String, value: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func textSearch(column: Swift.String, range: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func textSearch(column: Swift.String, query: PostgREST.URLQueryRepresentable, config: Swift.String? = nil, type: PostgREST.TextSearchType? = nil) -> PostgREST.PostgrestFilterBuilder
+  public func fts(column: Swift.String, query: PostgREST.URLQueryRepresentable, config: Swift.String? = nil) -> PostgREST.PostgrestFilterBuilder
+  public func plfts(column: Swift.String, query: PostgREST.URLQueryRepresentable, config: Swift.String? = nil) -> PostgREST.PostgrestFilterBuilder
+  public func phfts(column: Swift.String, query: PostgREST.URLQueryRepresentable, config: Swift.String? = nil) -> PostgREST.PostgrestFilterBuilder
+  public func wfts(column: Swift.String, query: PostgREST.URLQueryRepresentable, config: Swift.String? = nil) -> PostgREST.PostgrestFilterBuilder
+  public func filter(column: Swift.String, operator: PostgREST.PostgrestFilterBuilder.Operator, value: PostgREST.URLQueryRepresentable) -> PostgREST.PostgrestFilterBuilder
+  public func match(query: [Swift.String : PostgREST.URLQueryRepresentable]) -> PostgREST.PostgrestFilterBuilder
+  public func equals(column: Swift.String, value: Swift.String) -> PostgREST.PostgrestFilterBuilder
+  public func notEquals(column: Swift.String, value: Swift.String) -> PostgREST.PostgrestFilterBuilder
+  public func greaterThan(column: Swift.String, value: Swift.String) -> PostgREST.PostgrestFilterBuilder
+  public func greaterThanOrEquals(column: Swift.String, value: Swift.String) -> PostgREST.PostgrestFilterBuilder
+  public func lowerThan(column: Swift.String, value: Swift.String) -> PostgREST.PostgrestFilterBuilder
+  public func lowerThanOrEquals(column: Swift.String, value: Swift.String) -> PostgREST.PostgrestFilterBuilder
+  public func rangeLowerThan(column: Swift.String, range: Swift.String) -> PostgREST.PostgrestFilterBuilder
+  public func rangeGreaterThan(column: Swift.String, value: Swift.String) -> PostgREST.PostgrestFilterBuilder
+  public func rangeGreaterThanOrEquals(column: Swift.String, value: Swift.String) -> PostgREST.PostgrestFilterBuilder
+  public func rangeLowerThanOrEquals(column: Swift.String, value: Swift.String) -> PostgREST.PostgrestFilterBuilder
+  public func fullTextSearch(column: Swift.String, query: Swift.String, config: Swift.String? = nil) -> PostgREST.PostgrestFilterBuilder
+  public func plainToFullTextSearch(column: Swift.String, query: Swift.String, config: Swift.String? = nil) -> PostgREST.PostgrestFilterBuilder
+  public func phraseToFullTextSearch(column: Swift.String, query: Swift.String, config: Swift.String? = nil) -> PostgREST.PostgrestFilterBuilder
+  public func webFullTextSearch(column: Swift.String, query: Swift.String, config: Swift.String? = nil) -> PostgREST.PostgrestFilterBuilder
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers final public class PostgrestQueryBuilder : PostgREST.PostgrestBuilder {
+  final public func select(columns: Swift.String = "*", head: Swift.Bool = false, count: PostgREST.CountOption? = nil) -> PostgREST.PostgrestFilterBuilder
+  final public func insert<U>(values: U, returning: PostgREST.PostgrestReturningOptions? = nil, count: PostgREST.CountOption? = nil) -> PostgREST.PostgrestFilterBuilder where U : Swift.Encodable
+  final public func upsert<U>(values: U, onConflict: Swift.String? = nil, returning: PostgREST.PostgrestReturningOptions = .representation, count: PostgREST.CountOption? = nil, ignoreDuplicates: Swift.Bool? = nil) -> PostgREST.PostgrestFilterBuilder where U : Swift.Encodable
+  final public func update<U>(values: U, returning: PostgREST.PostgrestReturningOptions = .representation, count: PostgREST.CountOption? = nil) -> PostgREST.PostgrestFilterBuilder where U : Swift.Encodable
+  final public func delete(returning: PostgREST.PostgrestReturningOptions = .representation, count: PostgREST.CountOption? = nil) -> PostgREST.PostgrestFilterBuilder
+  @objc deinit
+}
+public struct PostgrestResponse : Swift.Hashable {
+  public let data: Foundation.Data
+  public let status: Swift.Int
+  public let count: Swift.Int?
+  public init(data: Foundation.Data, status: Swift.Int, count: Swift.Int?)
+  public init(data: Foundation.Data, response: Foundation.HTTPURLResponse)
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: PostgREST.PostgrestResponse, b: PostgREST.PostgrestResponse) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension PostgREST.PostgrestResponse {
+  public func json() throws -> Any
+  public func decoded<T>(to type: T.Type = T.self, using decoder: Foundation.JSONDecoder = .postgrest) throws -> T where T : Swift.Decodable
+  public func string(encoding: Swift.String.Encoding = .utf8) -> Swift.String?
+}
+extension Foundation.JSONDecoder {
+  public static var postgrest: Foundation.JSONDecoder
+}
+public enum PostgrestReturningOptions : Swift.String {
+  case minimal
+  case representation
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct EmptyParams : Swift.Encodable {
+  public init()
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers final public class PostgrestRpcBuilder : PostgREST.PostgrestBuilder {
+  final public func rpc<U>(params: U?, head: Swift.Bool = false, count: PostgREST.CountOption? = nil) -> PostgREST.PostgrestTransformBuilder where U : Swift.Encodable
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PostgrestTransformBuilder : PostgREST.PostgrestBuilder {
+  public func select(columns: Swift.String = "*") -> PostgREST.PostgrestTransformBuilder
+  public func order(column: Swift.String, ascending: Swift.Bool = true, nullsFirst: Swift.Bool = false, foreignTable: Swift.String? = nil) -> PostgREST.PostgrestTransformBuilder
+  public func limit(count: Swift.Int, foreignTable: Swift.String? = nil) -> PostgREST.PostgrestTransformBuilder
+  public func range(from lowerBounds: Swift.Int, to upperBounds: Swift.Int, foreignTable: Swift.String? = nil) -> PostgREST.PostgrestTransformBuilder
+  public func single() -> PostgREST.PostgrestTransformBuilder
+  public func csv() -> PostgREST.PostgrestTransformBuilder
+  @objc deinit
+}
+public enum TextSearchType : Swift.String {
+  case plain
+  case phrase
+  case websearch
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol URLQueryRepresentable {
+  var queryValue: Swift.String { get }
+}
+extension Swift.String : PostgREST.URLQueryRepresentable {
+  public var queryValue: Swift.String {
+    get
+  }
+}
+extension Swift.Int : PostgREST.URLQueryRepresentable {
+  public var queryValue: Swift.String {
+    get
+  }
+}
+extension Swift.Double : PostgREST.URLQueryRepresentable {
+  public var queryValue: Swift.String {
+    get
+  }
+}
+extension Swift.Bool : PostgREST.URLQueryRepresentable {
+  public var queryValue: Swift.String {
+    get
+  }
+}
+extension PostgREST.CountOption : Swift.Equatable {}
+extension PostgREST.CountOption : Swift.Hashable {}
+extension PostgREST.CountOption : Swift.RawRepresentable {}
+extension PostgREST.PostgrestFilterBuilder.Operator : Swift.Equatable {}
+extension PostgREST.PostgrestFilterBuilder.Operator : Swift.Hashable {}
+extension PostgREST.PostgrestFilterBuilder.Operator : Swift.RawRepresentable {}
+extension PostgREST.PostgrestReturningOptions : Swift.Equatable {}
+extension PostgREST.PostgrestReturningOptions : Swift.Hashable {}
+extension PostgREST.PostgrestReturningOptions : Swift.RawRepresentable {}
+extension PostgREST.TextSearchType : Swift.Equatable {}
+extension PostgREST.TextSearchType : Swift.Hashable {}
+extension PostgREST.TextSearchType : Swift.RawRepresentable {}

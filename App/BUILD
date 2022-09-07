@@ -4,27 +4,28 @@ load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 swift_library(
     name = "App_Classes",
     srcs = glob([
-        "*.swift"
+        "*.swift",
     ]),
     data = [
-    	"//Assets:Assets",
-    	"Base.lproj/Main.storyboard",
-    	"Base.lproj/LaunchScreen.storyboard",
+        "Base.lproj/LaunchScreen.storyboard",
+        "Base.lproj/Main.storyboard",
+        "//Assets",
     ],
     deps = [
         "//Lib/Logging:TLLogging",
-        "//ProjectManagement:ProjectManagement",
-    ]
+        "//ProjectManagement",
+        "//Thirdparty/Supabase:Supabase"
+    ],
 )
 
 ios_application(
     name = "ios_app",
     bundle_id = "com.thanhvu.test",
-    infoplists = ["Info.plist"],
     families = ["iphone"],
+    infoplists = ["Info.plist"],
     minimum_os_version = "12.0",
+    visibility = ["//visibility:public"],
     deps = [
         ":App_Classes",
     ],
-    visibility = ["//visibility:public"],
 )

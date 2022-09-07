@@ -1,0 +1,29 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name ComposableKeychain
+import Foundation
+import KeychainAccess
+import Swift
+import _Concurrency
+public struct KeychainClient {
+  public var getString: (_ key: ComposableKeychain.KeychainClient.Key) throws -> Swift.String?
+  public var getData: (_ key: ComposableKeychain.KeychainClient.Key) throws -> Foundation.Data?
+  public var setString: (_ value: Swift.String, _ key: ComposableKeychain.KeychainClient.Key) throws -> Swift.Void
+  public var setData: (_ value: Foundation.Data, _ key: ComposableKeychain.KeychainClient.Key) throws -> Swift.Void
+  public var remove: (_ key: ComposableKeychain.KeychainClient.Key) throws -> Swift.Void
+  public var removeAll: () throws -> Swift.Void
+  public var contains: (_ key: ComposableKeychain.KeychainClient.Key) throws -> Swift.Bool
+  public init(getString: @escaping (_ key: ComposableKeychain.KeychainClient.Key) throws -> Swift.String?, getData: @escaping (_ key: ComposableKeychain.KeychainClient.Key) throws -> Foundation.Data?, setString: @escaping (_ value: Swift.String, _ key: ComposableKeychain.KeychainClient.Key) throws -> Swift.Void, setData: @escaping (_ value: Foundation.Data, _ key: ComposableKeychain.KeychainClient.Key) throws -> Swift.Void, remove: @escaping (_ key: ComposableKeychain.KeychainClient.Key) throws -> Swift.Void, removeAll: @escaping () throws -> Swift.Void, contains: @escaping (_ key: ComposableKeychain.KeychainClient.Key) throws -> Swift.Bool)
+  public struct Key : Swift.RawRepresentable {
+    public var rawValue: Swift.String
+    public init(rawValue: Swift.String)
+    public init(_ rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+  }
+}
+extension ComposableKeychain.KeychainClient {
+  public static func live(keychain: KeychainAccess.Keychain) -> ComposableKeychain.KeychainClient
+}
+extension ComposableKeychain.KeychainClient {
+  public static let noop: ComposableKeychain.KeychainClient
+}
